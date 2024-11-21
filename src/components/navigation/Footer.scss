@@ -1,0 +1,24 @@
+#footer {
+  display: flex;
+  justify-content: center;
+  background-color: lightgrey;
+}
+
+.footer-content {
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+/* Medium devices such as tablets (768px and up) */
+@media only screen and (min-width: 768px) {
+  .footer-content {
+    width: 80%;
+  }
+}
+
+/* Largest devices such as desktops (1280px and up) */
+@media only screen and (min-width: 1280px) {
+  .footer-content {
+    width: 60%;
+  }
+}
