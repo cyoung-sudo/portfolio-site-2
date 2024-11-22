@@ -1,12 +1,16 @@
 .app-section-1 {
   min-height: 100vh;
+  background-color: lightgrey;
 }
 
 .app-section-2 {
+  display: flex;
+  justify-content: center;
   min-height: 100vh;
-  background-color: lightgrey;
+  padding: 2rem 0;
 }
 
 .app-section-3 {
   min-height: 100vh;
+  background-color: lightgrey;
 }

@@ -1,0 +1,21 @@
+#projectShow {
+  width: 100%;
+}
+
+.projectShow-header {
+  margin-bottom: 2rem;
+}
+
+/* Medium devices such as tablets (768px and up) */
+@media only screen and (min-width: 768px) {
+  #projectShow {
+    width: 80%;
+  }
+}
+
+/* Largest devices such as desktops (1280px and up) */
+@media only screen and (min-width: 1280px) {
+  #projectShow {
+    width: 60%;
+  }
+}
