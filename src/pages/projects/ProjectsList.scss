@@ -12,6 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .projectsList-project {
@@ -68,6 +69,45 @@
       background-color: var(--theme-color-1-hover);
     }
   }
+}
+
+.projectsList-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.projectsList-pagination-content {
+  display: flex;
+  border-radius: var(--border-radius);
+  box-shadow: 3px 3px 5px gray;
+  > button {
+    padding: 0.5rem 0.8rem;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--theme-color-1);
+    color: white;
+    &:hover {
+      cursor: pointer;
+      transition: all 1s ease;
+      background-color: var(--theme-color-1-hover);
+    }
+  }
+  > div {
+    padding: 0.5rem 0.8rem;
+    border-top: 0.5px solid var(--theme-color-1);
+    border-bottom: 0.5px solid var(--theme-color-1);
+    font-weight: 300;
+  }
+}
+
+.projectsList-prev {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.projectsList-next {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
 }
 
 /* Medium devices such as tablets (768px and up) */
