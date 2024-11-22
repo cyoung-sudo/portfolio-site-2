@@ -5,7 +5,7 @@
   z-index: 100;
   height: var(--navigationBar-height);
   width: 100vw;
-  background-color: lightgrey;
+  background-color: var(--transparent-light-color);
 }
 
 .navigationBar-content {
