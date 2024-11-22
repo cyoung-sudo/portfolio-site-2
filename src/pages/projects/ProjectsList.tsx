@@ -6,9 +6,16 @@ import { projectsData } from "../../data/projectsData";
 
 interface ProjectsListProps {
   setShowProject: (project: IProject | null) => void;
+  section2Ref: React.MutableRefObject<HTMLDivElement | null>;
 }
 
-const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject}) => {
+const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}) => {
+  const toggleMode = (project: IProject) => {
+    setShowProject(project);
+    // Scroll to projects-segment
+    if(section2Ref.current) section2Ref.current.scrollIntoView();
+  };
+
   return(
     <div id="projectsList">
       <div className="projectsList-header">
@@ -27,7 +34,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject}) => {
               <div className="projectsList-about">{project.about}</div>
             </div>
             <div className="projectsList-btns">
-              <button onClick={() => setShowProject(project)}>View</button>
+              <button onClick={() => toggleMode(project)}>View</button>
             </div>
           </div>
         ))}

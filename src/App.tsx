@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 // Pages
 import ProjectsList from './pages/projects/ProjectsList';
 import ProjectShow from './pages/projects/ProjectShow';
@@ -12,6 +12,8 @@ import { IProject } from './types/index.ds';
 function App() {
   // Page controls
   const [showProject, setShowProject] = useState<IProject | null>(null);
+  // Hooks
+  const section2Ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <div id="app">
@@ -20,9 +22,18 @@ function App() {
 
       </div>
 
-      <div className="app-section-2">
-        {!showProject && <ProjectsList setShowProject={setShowProject}/>}
-        {showProject && <ProjectShow project={showProject} setShowProject={setShowProject}/>}
+      <div className="app-section-2" ref={section2Ref}>
+        {!showProject && 
+          <ProjectsList 
+            setShowProject={setShowProject}
+            section2Ref={section2Ref}/>
+        }
+        {showProject && 
+          <ProjectShow 
+            project={showProject} 
+            setShowProject={setShowProject}
+            section2Ref={section2Ref}/>
+        }
       </div>
 
       <div className="app-section-3">

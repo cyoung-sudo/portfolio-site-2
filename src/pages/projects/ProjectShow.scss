@@ -4,6 +4,80 @@
 
 .projectShow-header {
   margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  > span {
+    position: relative;
+    left: 6px;
+    bottom: 4px;
+    font-size: 1rem;
+    color: green;
+  }
+}
+
+.projectShow-carousel {
+  margin-bottom: 3rem;
+  // Override imported styling
+  svg {
+    color: black;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+.projectShow-info {
+  display: flex;
+  justify-content: center;
+}
+
+.projectShow-info-content {
+  width: 100%;
+  margin: 1rem;
+  padding: 1.2rem;
+  border: 0.5px solid gray;
+  border-radius: var(--border-radius);
+  box-shadow: 3px 3px 5px gray;
+  > div:not(:last-child) {
+    padding-bottom: 1rem;
+  }
+}
+
+.projectShow-about {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.projectShow-tech {
+  display: flex;
+  flex-wrap: wrap;
+  > div {
+    margin: 0 0 0.2rem 0.2rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: gray;
+    color: white;
+  }
+}
+
+.projectShow-btns {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
+  > button {
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    background-color: var(--theme-color-1);
+    color: white;
+    &:hover {
+      cursor: pointer;
+      transition: all 1s ease;
+      background-color: var(--theme-color-1-hover);
+    }
+  }
 }
 
 /* Medium devices such as tablets (768px and up) */
