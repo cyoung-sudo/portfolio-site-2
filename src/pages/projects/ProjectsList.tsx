@@ -1,8 +1,6 @@
 import "./ProjectsList.scss";
 // React
 import { useState, useEffect } from "react";
-// Hooks
-import usePagination from "../../hooks/usePagination";
 // Types
 import { IProject } from "../../types/index.ds";
 // Data
@@ -12,40 +10,59 @@ interface ProjectsListProps {
   setShowProject: (project: IProject | null) => void;
   section2Ref: React.MutableRefObject<HTMLDivElement | null>;
 }
-
-type pageDir = "prev" | "next";
+type filter = "all" | "live";
 
 const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}) => {
+  // Filter
+  const [filterMode, setFilterMode] = useState<filter>("all");
   // Pagination
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [pageContent, setPageContent] = useState<IProject[] | null>(null);
-  // Hooks
-  const pagi = usePagination(projectsData, 6);
 
   useEffect(() => {
-    let temp = pagi.currentData();
+    // Filter content
+    let filteredContent;
+    if(filterMode === "all") {
+      filteredContent = projectsData;
+    } else {
+      filteredContent = projectsData.filter(t => t.deployed === true);
+    }
+    // Set total pages
+    setTotalPages(Math.ceil(filteredContent.length / 6))
+    // Set page content
+    let temp = getPageContent(filteredContent, 6);
     setPageContent(temp);
-  }, [pagi.currentPage]);
+    // Scroll to projects-segment
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+  }, [filterMode, page]);
 
   const toggleMode = (project: IProject) => {
     setShowProject(project);
     // Scroll to projects-segment
-    if(section2Ref.current) section2Ref.current.scrollIntoView();
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handlePagi = (pageDir: pageDir) => {
-    if(pageDir === "prev") {
-      pagi.prevPage();
-    } else {
-      pagi.nextPage();
-    }
-    // Scroll to projects-segment
-    if(section2Ref.current) section2Ref.current.scrollIntoView();
+  const handleFilter = (filter: filter) => {
+    setFilterMode(filter);
+    setPage(1);
   }
+
+  const getPageContent = (content: IProject[], itemsPerPage: number) => {
+    const begin = (page - 1) * itemsPerPage;
+    const end = begin + itemsPerPage;
+    return content.slice(begin, end);
+  };
 
   return(
     <div id="projectsList">
       <div className="projectsList-header">
         Projects
+      </div>
+
+      <div>
+        <button onClick={() => handleFilter("all")}>All</button>
+        <button onClick={() => handleFilter("live")}>Live</button>
       </div>
 
       {pageContent &&
@@ -70,9 +87,9 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
 
       <div className="projectsList-pagination">
         <div className="projectsList-pagination-content">
-          <button className="projectsList-prev" onClick={() => handlePagi("prev")}>Prev</button>
-          <div>{pagi.currentPage} / {pagi.totalPages}</div>
-          <button className="projectsList-next" onClick={() => handlePagi("next")}>Next</button>
+          <button className="projectsList-prev" onClick={() => setPage(page-1)}>Prev</button>
+          <div>{page} / {totalPages}</div>
+          <button className="projectsList-next" onClick={() => setPage(page+1)}>Next</button>
         </div>
       </div>
     </div>
