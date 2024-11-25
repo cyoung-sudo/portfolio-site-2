@@ -60,9 +60,20 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
         Projects
       </div>
 
-      <div>
-        <button onClick={() => handleFilter("all")}>All</button>
-        <button onClick={() => handleFilter("live")}>Live</button>
+      <div className="projectsList-filters">
+        <div className="projectsList-filters-content">
+          <div>Filters</div>
+          <button
+            className={(filterMode === "all") ? "active-filter" : ""}
+            onClick={() => handleFilter("all")}>
+            All
+          </button>
+          <button
+            className={(filterMode === "live") ? "active-filter" : ""}
+            onClick={() => handleFilter("live")}>
+            Live
+          </button>
+        </div>
       </div>
 
       {pageContent &&
@@ -87,9 +98,19 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
 
       <div className="projectsList-pagination">
         <div className="projectsList-pagination-content">
-          <button className="projectsList-prev" onClick={() => setPage(page-1)}>Prev</button>
+          <button 
+            className="projectsList-prev"
+            disabled={(page <= 1) ? true: false}
+            onClick={() => setPage(page-1)}>
+            Prev
+          </button>
           <div>{page} / {totalPages}</div>
-          <button className="projectsList-next" onClick={() => setPage(page+1)}>Next</button>
+          <button 
+            className="projectsList-next"
+            disabled={(page >= totalPages) ? true: false}
+            onClick={() => setPage(page+1)}>
+            Next
+          </button>
         </div>
       </div>
     </div>
