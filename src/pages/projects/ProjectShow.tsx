@@ -27,7 +27,7 @@ const ProjectShow: React.FC<ProjectShowProps> = ({project, setShowProject, secti
   const toggleMode = () => {
     setShowProject(null);
     // Scroll to projects-segment
-    if(section2Ref.current) section2Ref.current.scrollIntoView();
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return(
