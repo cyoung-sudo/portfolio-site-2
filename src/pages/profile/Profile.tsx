@@ -4,7 +4,11 @@ import { motion } from "motion/react";
 
 const Profile = () => {
   return(
-    <div id="profile">
+    <motion.div 
+      id="profile"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}>
       <div className="profile-left">
         <img src="casual-male-avatar-silhouette-2.webp"/>
         <div className="profile-name">Christopher Young</div>
@@ -16,7 +20,7 @@ const Profile = () => {
         <div>Graduated (March 2020)</div>
         <div>GPA 3.46</div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
