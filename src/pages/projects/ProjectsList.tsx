@@ -1,6 +1,8 @@
 import "./ProjectsList.scss";
 // React
 import { useState, useEffect } from "react";
+// Components
+import ProjectCard from "../../components/cards/ProjectCard";
 // Types
 import { IProject } from "../../types/index.ds";
 // Data
@@ -19,6 +21,8 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pageContent, setPageContent] = useState<IProject[] | null>(null);
+  // Loading status
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Filter content
@@ -33,8 +37,8 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
     // Set page content
     let temp = getPageContent(filteredContent, 6);
     setPageContent(temp);
-    // Scroll to projects-segment
-    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+    // Loaded
+    setLoading(false);
   }, [filterMode, page]);
 
   const toggleMode = (project: IProject) => {
@@ -43,15 +47,32 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
     if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleFilter = (filter: filter) => {
-    setFilterMode(filter);
-    setPage(1);
-  }
-
   const getPageContent = (content: IProject[], itemsPerPage: number) => {
     const begin = (page - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
     return content.slice(begin, end);
+  };
+
+  const handleFilter = (filter: filter) => {
+    setLoading(true);
+    setFilterMode(filter);
+    setPage(1);
+    // Scroll to projects-segment
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const prevPage = () => {
+    setLoading(true);
+    setPage(page - 1);
+    // Scroll to projects-segment
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const nextPage = () => {
+    setLoading(true);
+    setPage(page + 1);
+    // Scroll to projects-segment
+    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return(
@@ -76,43 +97,36 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
         </div>
       </div>
 
-      {pageContent &&
+      {pageContent && !loading &&
         <div className="projectsList-projects">
           {pageContent.map((project, idx) => (
-            <div className="projectsList-project" key={idx}>
-              <img src={project.images[0]}/>
-              <div className="projectsList-text">
-                <div className="projectsList-name">
-                  {project.name}
-                  {project.deployed && <span>Live</span>}
-                </div>
-                <div className="projectsList-about">{project.about}</div>
-              </div>
-              <div className="projectsList-btns">
-                <button onClick={() => toggleMode(project)}>View</button>
-              </div>
-            </div>
+            <ProjectCard
+              key={idx}
+              project={project}
+              toggleMode={toggleMode}/>
           ))}
         </div>
       }
 
-      <div className="projectsList-pagination">
-        <div className="projectsList-pagination-content">
-          <button 
-            className="projectsList-prev"
-            disabled={(page <= 1) ? true: false}
-            onClick={() => setPage(page-1)}>
-            Prev
-          </button>
-          <div>{page} / {totalPages}</div>
-          <button 
-            className="projectsList-next"
-            disabled={(page >= totalPages) ? true: false}
-            onClick={() => setPage(page+1)}>
-            Next
-          </button>
+      {!loading &&
+        <div className="projectsList-pagination">
+          <div className="projectsList-pagination-content">
+            <button 
+              className="projectsList-prev"
+              disabled={(page <= 1) ? true: false}
+              onClick={() => prevPage()}>
+              Prev
+            </button>
+            <div>{page} / {totalPages}</div>
+            <button 
+              className="projectsList-next"
+              disabled={(page >= totalPages) ? true: false}
+              onClick={() => nextPage()}>
+              Next
+            </button>
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 };
