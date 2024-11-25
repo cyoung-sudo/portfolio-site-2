@@ -1,6 +1,7 @@
 import './App.scss';
 import { useState, useRef } from 'react';
 // Pages
+import Profile from './pages/profile/Profile';
 import ProjectsList from './pages/projects/ProjectsList';
 import ProjectShow from './pages/projects/ProjectShow';
 // Components
@@ -19,7 +20,7 @@ function App() {
     <div id="app">
       <NavigationBar/>
       <div className="app-section-1">
-
+        <Profile/>
       </div>
 
       <div className="app-section-2" ref={section2Ref}>
