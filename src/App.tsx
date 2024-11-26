@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import Profile from './pages/profile/Profile';
 import ProjectsList from './pages/projects/ProjectsList';
 import ProjectShow from './pages/projects/ProjectShow';
+import Info from './pages/info/Info';
 // Components
 import NavigationBar from './components/navigation/NavigationBar';
 import Footer from './components/navigation/Footer';
@@ -38,7 +39,7 @@ function App() {
       </div>
 
       <div className="app-section-3">
-
+        <Info/>
       </div>
       <Footer/>
     </div>
