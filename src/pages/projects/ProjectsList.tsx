@@ -81,21 +81,23 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
         Projects
       </div>
 
-      <div className="projectsList-filters">
-        <div className="projectsList-filters-content">
-          <div>Filters</div>
-          <button
-            className={(filterMode === "all") ? "active-filter" : ""}
-            onClick={() => handleFilter("all")}>
-            All
-          </button>
-          <button
-            className={(filterMode === "live") ? "active-filter" : ""}
-            onClick={() => handleFilter("live")}>
-            Live
-          </button>
+      {!loading &&
+        <div className="projectsList-filters">
+          <div className="projectsList-filters-content">
+            <div>Filters</div>
+            <button
+              className={(filterMode === "all") ? "active-filter" : ""}
+              onClick={() => handleFilter("all")}>
+              All
+            </button>
+            <button
+              className={(filterMode === "live") ? "active-filter" : ""}
+              onClick={() => handleFilter("live")}>
+              Live
+            </button>
+          </div>
         </div>
-      </div>
+      }
 
       {pageContent && !loading &&
         <div className="projectsList-projects">
