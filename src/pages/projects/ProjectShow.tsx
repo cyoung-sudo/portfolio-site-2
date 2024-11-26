@@ -1,6 +1,8 @@
 import "./ProjectShow.scss";
 // Types
 import { IProject } from "../../types/index.ds";
+// Animations
+import { motion } from "motion/react";
 // Carousel
 import Slider from "react-slick";
 // Icons
@@ -45,7 +47,11 @@ const ProjectShow: React.FC<ProjectShowProps> = ({project, setShowProject, secti
         </Slider>
       </div>
 
-      <div className="projectShow-info">
+      <motion.div 
+      className="projectShow-info"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}>
         <div className="projectShow-info-content">
           <div className="projectShow-about">{project.about}</div>
           {project.website && 
@@ -63,12 +69,12 @@ const ProjectShow: React.FC<ProjectShowProps> = ({project, setShowProject, secti
           {project.repos.server &&
             <div>Server Repo: <a href={project.repos.server} target="_blank">{project.repos.server}</a></div>
           }
-        </div>
-      </div>
 
-      <div className="projectShow-btns">
-        <button onClick={toggleMode}>Back to Projects</button>
-      </div>
+          <div className="projectShow-btns">
+            <button onClick={toggleMode}>Back to Projects</button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   )
 };

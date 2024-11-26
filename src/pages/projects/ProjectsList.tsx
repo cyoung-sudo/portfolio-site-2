@@ -7,6 +7,8 @@ import ProjectCard from "../../components/cards/ProjectCard";
 import { IProject } from "../../types/index.ds";
 // Data
 import { projectsData } from "../../data/projectsData";
+// Animations
+import { motion } from "motion/react";
 
 interface ProjectsListProps {
   setShowProject: (project: IProject | null) => void;
@@ -82,7 +84,11 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
       </div>
 
       {!loading &&
-        <div className="projectsList-filters">
+        <motion.div 
+        className="projectsList-filters"
+        initial={{ opacity: 0, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}>
           <div className="projectsList-filters-content">
             <div>Filters</div>
             <button
@@ -96,7 +102,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
               Live
             </button>
           </div>
-        </div>
+        </motion.div >
       }
 
       {pageContent && !loading &&
