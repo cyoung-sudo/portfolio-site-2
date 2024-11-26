@@ -5,8 +5,13 @@
 }
 
 .footer-content {
+  display: flex;
+  justify-content: center;
   width: 100%;
   padding: 2rem 1rem;
+  > div {
+    font-weight: 300;
+  }
 }
 
 /* Medium devices such as tablets (768px and up) */
