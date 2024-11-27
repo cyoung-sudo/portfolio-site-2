@@ -56,11 +56,13 @@ const ProjectsList: React.FC<ProjectsListProps> = ({setShowProject, section2Ref}
   };
 
   const handleFilter = (filter: filter) => {
-    setLoading(true);
-    setFilterMode(filter);
-    setPage(1);
-    // Scroll to projects-segment
-    if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+    if(filter !== filterMode) {
+      setLoading(true);
+      setFilterMode(filter);
+      setPage(1);
+      // Scroll to projects-segment
+      if(section2Ref.current) section2Ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   const prevPage = () => {
